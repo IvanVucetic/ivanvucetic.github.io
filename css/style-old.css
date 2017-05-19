@@ -1,0 +1,30 @@
+body {
+  font-family: "Roboto Slab";
+  font-size: 3em;
+  text-align: center;
+}
+
+div {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  border-bottom: 1px solid #aaa;
+}
+.nomen {
+  font-weight: thin;
+}
+.surname {
+  font-family: "Roboto COndensed";
+  font-weight: regular;
+  color: #318CB5;
+  font-size: 1.5em;
+  text-shadow: 4px 4px 4px #aaa;
+}
