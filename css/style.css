@@ -1,42 +1,274 @@
 body {
-	font-family: 'Roboto Slab', sans-serif;
-	/* font-weight: 100; -- useless, only values the one from the font link */
-	color: #000;
-	font-size: 1.6em;
-  margin: 0;
+/*   margin-top: 3%; */
   text-align: center;
   min-width: 300px;
+  font-family: 'Roboto Slab','Open Sans';
 }
 
-#container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-  margin: -30px auto;
+section {
+  margin-bottom: 50px;
 }
 
-#top-titles {
-  align-self: center;
+p {
+  font-size: 19px;
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto 30px;
 }
 
-#top-titles h1 {
-	font-size: 2em;
-	font-weight: 400;
-	border: 3px solid #333;
-	text-transform: uppercase;
-	padding: 30px;
-	display: inline-block;
-	margin: 0 auto;
+p.highlight {
+  font-weight: 400;
 }
 
+span.highlight {
+  color: #318CB5;  /*318CB5*/
+}
+
+
+/* da se ne bi preklapao tekst sa menijem */
+.container-fluid {
+  padding: 0 20%;
+}
+
+h5 {
+  font-weight: 300;
+  font-size: 26px; /* */
+}
+
+h4 {
+  font-weight: 300;
+  font-size: 36px; /* */
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 48px; /*48px  3.4em  340%*/
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 62px; /* 4.4em 440% 62px */
+}
+
+/* Title size for mobile devices*/
+@media only screen and (max-width : 350px) {
+  h3 {
+    font-size: 38px; /* 20% less then regular*/
+  }
+  h2 {
+    font-size: 40px;
+  }
+  
+}
+
+#title {
+ padding-top: 150px;
+ height: 100%;
+}
+
+@media only screen and (max-width : 350px) {
+  #title {
+    padding-top: 100px;
+  }
+}
+
+#title-row {
+  /*if just 'height', looks bad on mobile because font doesn't resize */
+  min-height: 100vh;
+  margin-bottom: 0;
+}
+
+.section-title {
+  padding-top: 50px;
+  margin-bottom: 40px;
+}
+
+#edu-row h4 {
+  margin-top: 60px;  
+}
+
+/* NAPRAVI ZA LINKOVE U TEKSTU DA BUDU JASNIJI*/
 a {
+  color: #318CB5;
   text-decoration: none;
-  color: inherit;
-	transition: color 2s;
 }
 
 a:hover {
   color: #318CB5;
 }
+
+#about-row a,
+#edu-row a,
+#skills-row a,
+#lang-row a {
+  border-bottom: 1px dotted #318CB5;
+  text-decoration: none;
+}
+
+#about-row a:hover,
+#edu-row a:hover,
+#skills-row a:hover,
+#lang-row a:hover {
+  border-bottom: 1px dotted #236380;
+  color: #236380;
+}
+
+.experience strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* for mobile UX align Uni and companies left*/
+.experience > div:nth-child(odd) {
+  text-align: left;
+}
+
+ul.no-bullets {
+    display: block;
+    list-style-type: none;
+    margin: 20px 0 0;
+    padding: 0px;
+    font-weight: 300;
+}
+
+#portfolio-row img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.35s, transform 0.35s;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.img-container {
+  margin-top: 20px;
+}
+
+.img-container:hover .overlay {
+  opacity: .85;
+}
+
+.portfolio-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.tech-used {
+  transition: 0.8s ease;
+  transform: translate3d(100%,0,0);
+}
+
+.overlay:hover .tech-used {
+  transform: translate3d(0,0,0);
+}
+
+#footer-container {
+  padding: 0 20%;
+}
+
+#contact-row {
+  font-size: 22px;
+  background-color: #333;
+  color: #fff;
+  margin-bottom: 0;
+  padding-bottom: 50px;
+}
+ 
+
+#contact-row i {
+  margin-right: 5px;
+}
+
+#contact-row a:hover {
+  color: #58acd2;
+  text-decoration: none;
+}
+
+@media(max-width: 767px) {
+  #contact-row a span {
+    display: none;
+  }
+  #contact-row li {
+    display: inline;
+  }
+}  
+
+/* navigation */
+.navbar {
+    border: 0px;
+    background-color: #222222;
+    position: fixed;
+    top: 150px;
+    left: 3%;
+    width: 110px;
+    z-index: 999;
+    /* font-family if it doesn't inherit from parent */
+}
+
+.navbar .navbar-collapse {
+    padding: 0px;
+    max-height: none;
+}
+
+.navbar .navbar-nav {
+    float: none;
+}
+
+.navbar-nav {
+    margin: 0px;
+}
+
+.navbar .nav > li {
+    display: block;
+    float: none;
+    height: 80px;
+}
+
+.navbar .nav > li a {
+    display: block;
+    height: 80px;
+    text-align: center;
+    padding-top: 30px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.navbar .nav > li a:hover, .navbar .nav > li a:focus { 
+    color: #999999; 
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background: #318CB5;
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar { background: #222222; }
+
+
+/* mobile navigation */
+@media(max-width: 767px) {
+  .navbar  { 
+    left: 0px; width: 100%;
+    position: fixed; top: 0;
+  }
+  /* make fields a bit thinner */
+  .navbar .nav > li { height: 60px; }
+  .navbar .nav > li a { height: 60px; padding-top: 20px;}
+} 
