@@ -58,7 +58,7 @@ h2 {
   h2 {
     font-size: 40px;
   }
-
+  
 }
 
 #title {
@@ -84,7 +84,7 @@ h2 {
 }
 
 #edu-row h4 {
-  margin-top: 60px;
+  margin-top: 60px;  
 }
 
 /* NAPRAVI ZA LINKOVE U TEKSTU DA BUDU JASNIJI*/
@@ -167,7 +167,6 @@ ul.no-bullets {
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .tech-used {
@@ -190,7 +189,7 @@ ul.no-bullets {
   margin-bottom: 0;
   padding-bottom: 50px;
 }
-
+ 
 
 #contact-row i {
   margin-right: 5px;
@@ -208,7 +207,7 @@ ul.no-bullets {
   #contact-row li {
     display: inline;
   }
-}
+}  
 
 /* navigation */
 .navbar {
@@ -250,8 +249,8 @@ ul.no-bullets {
     color: #FFFFFF;
 }
 
-.navbar .nav > li a:hover, .navbar .nav > li a:focus {
-    color: #999999;
+.navbar .nav > li a:hover, .navbar .nav > li a:focus { 
+    color: #999999; 
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
@@ -265,11 +264,11 @@ ul.no-bullets {
 
 /* mobile navigation */
 @media(max-width: 767px) {
-  .navbar  {
+  .navbar  { 
     left: 0px; width: 100%;
     position: fixed; top: 0;
   }
   /* make fields a bit thinner */
   .navbar .nav > li { height: 60px; }
   .navbar .nav > li a { height: 60px; padding-top: 20px;}
-}
+} 
