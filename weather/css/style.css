@@ -1,0 +1,38 @@
+/*Don't use div, it will mess the map up*/ 
+
+body{
+/*   background: set background */
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.titles {
+  background: silver;
+}
+
+.col {
+  margin-bottom: 20px;
+}
+
+#weather-data {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 55px;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+li:hover {
+  transform: scale(1.2, 1.2);
+}
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Local Weather App</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <div class="container-fluid bg-faded">
+  
+  <div class="row titles">
+    <h1 class="text-center">Show Me The Weather!</h1>
+    <div class="col text-center">Don't feel like going out and checking?</div>
+  </div> <!-- end row -->
+  
+  <div class="row" id="weather-data"> <!-- weather data-->
+    <div class="col-md-6 col-sm-6 text-center">
+      <div id="temperature"  class="text-center">
+      </div> <!-- end temp -->
+      <button id='toggle-units' class="btn btn-default" data-type="c">Show Imperial</button>
+    </div>
+    <figure id="icons" class="col-md-6 col-sm-6 text-center">
+      <canvas id="icon" height="100px"></canvas>
+    </figure>
+  </div> <!-- end row -->
+  
+  <div class="row"> <!-- meant for map -->
+    <div id="map" class="center-block">  
+    </div>
+  </div> <!-- end row -->
+  <div id="credits" class="row text-center">
+    <a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+  </div>
+  
+  <div class="text-center row">
+    <ul class="list-unstyled">
+	    <li>
+	      <a href="https://www.linkedin.com/in/vuceticivan/" target="_blank">
+          <i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+      </li>
+	    <li>
+	  	  <a href="https://github.com/IvanVucetic" target="_blank">
+	  		<i class="fa fa-github-square" aria-hidden="true"></i></a>
+	    </li>
+      <li>
+	  	  <a href="mailto:ivan.vucetic@ymail.com" target="_blank">
+	  		<i class="fa  fa-envelope-square" aria-hidden="true"></i></a>
+	    </li>
+    </ul>  
+  </div>
+  
+  
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://maps.googleapis.com/maps/api/js'></script>
+<script src='https://rawgithub.com/darkskyapp/skycons/master/skycons.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
