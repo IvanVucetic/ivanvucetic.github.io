@@ -1,0 +1,248 @@
+body {
+    font-size: 15px;
+    font-family: Helvetica, Arial, Sans-Serif;
+}
+
+
+input {
+    width: 400px;
+    height: 30px;
+    font-size: 15px;
+    background: white
+}
+
+button {
+    height: 30px;
+}
+
+.content {
+    width: 1200px;
+    margin: auto;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 110px;
+    width: 100%;
+    background-color: #3EA4D2;
+}
+
+.header h1 {
+    color: white;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.searchField-container {
+    margin: 150px auto 70px;
+    text-align: center;
+    clear: right;
+}
+
+.searchField * {
+    vertical-align: middle;
+}
+
+.carList-container {
+    margin-bottom: 40px;
+}
+
+.cars-list {
+    margin-top: 40px;
+}
+
+.row:first-child .cell {
+    padding-top: 0px;
+}
+
+.cell {
+    display: inline-block;
+    width: 33%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #dbe3e7;
+    border-right: 1px solid #dbe3e7;
+}
+
+.cell:nth-child(3) {
+    border-right: none;
+}
+
+.row:last-child .cell {
+    border-bottom: none;
+}
+
+.car-wrapper {
+    width: 333px;
+    margin: auto;
+    position: relative;
+    height: 200px;
+}
+
+.cell:first-child .car-wrapper {
+    margin-left: 0;
+}
+
+.cell:nth-child(3) .car-wrapper {
+    margin-right: 0;
+}
+
+.car-front-info {
+}
+
+.car-back-info,
+.car-front-info {
+    text-align: center;
+    border: 1px solid #dbe3e7;
+    transition: transform 1s;
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.cell:hover .car-front-info {
+    transform: rotateX(180deg);
+}
+
+.cell:hover .car-back-info {
+    transform: rotateX(0deg);
+}
+
+.car-back-info {
+    transform: rotateX(180deg);
+}
+
+.overlay {
+    color: white;
+    background-color: #3EA4D2;
+    opacity: 0.9;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 40px 10px 0;
+}
+
+#race {
+    margin-bottom: 150px;
+    text-align: center;
+}
+
+.animation-buttons {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.animation-buttons input,
+.animation-buttons button {
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+.raceTracks {
+    position: relative;
+}
+
+.singleTrack {
+    display: inline-block;
+    width: 1000px;
+    height: 70px;
+    background-image: url("https://www.sketchuptextureclub.com/public/texture_m/0043-asphalt-texture-seamless.jpg");
+    background-repeat: repeat;
+    background-size: 50px;
+    margin-top: 25px;
+    position: relative;
+    border-right: dashed 3px white;
+    box-sizing: border-box;
+}
+
+.distance {
+    color: red;
+    position: absolute;
+    height: 70px;
+    border-right: 1px solid red;
+}
+
+.label {
+    height: 20px;
+    width: 40px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background-color: yellow;
+    border: 0.5px solid black;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.speedLimit {
+    color: green;
+    position: absolute;
+    border-right: 2px dashed green;
+    z-index: 1;
+    /*left i height dodati jQ*/
+}
+
+.speedLimitLabel {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    bottom: -20px;
+    left: -18px;
+    background-color: white;
+    box-sizing: border-box;
+    text-align: center;
+    color: black;
+    border: 3px solid gray;
+    border-radius: 50%;
+    line-height: 34px;
+}
+
+.trafficLight {
+    color: yellow;
+    position: absolute;
+    border-right: 2px dashed yellow;
+    z-index: 1;
+}
+
+.lightHead {
+    height: 20px;
+    width: 40px;
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background-color: gray;
+    border: 0.5px solid black;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+}
+
+.redLight {
+    background-color: red;
+}
+
+.greenLight {
+    background-color: green;
+}
+
+.racer {
+    display: inline-block;
+    height: 70px;
+    width: 70px;
+    position: relative;
+    z-index: 2;
+    perspective: 800px;
+    background-size: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
