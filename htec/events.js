@@ -4,29 +4,31 @@ $(".searchField-input").keyup(function () {
     getJSON(input.val().trim());
 });
 
-// DRAW RACERS
+
+// DRAW RACERS AND TRACKS
 $(document).on("click", '.car-wrapper', function (event) {
 
     var carid = $(this).data("id");
-    //BRISANJE
+
+    //DELETING
     if (alreadyAdded(carid, nizZaTrku)) {
-        brisanjeStaze(carid);
-        nizZaTrku = brisiAuto(nizZaTrku, carid);
+        deletingTrack(carid);
+        nizZaTrku = deleteCar(nizZaTrku, carid);
         // must make new call to update speed limits
         $.ajax({
             url: "data.json",
             dataType: "json",
             method: "GET",
             success: function (jsonData) {
-                crtanjeOgranicenja(jsonData.speed_limits, jsonData.distance);
-                crtanjeSemafora(jsonData.traffic_lights, jsonData.distance);
+                drawingSpeedLimits(jsonData.speed_limits, jsonData.distance);
+                drawingTrafficLights(jsonData.traffic_lights, jsonData.distance);
             }
         });
-        //CRTANJE
+        //DRAWING
     } else {
         var tempCar = {};
         tempCar["id"] = carid;
-        // promeniti izgled elementa (prevrnuti ga)
+
         $.ajax({
             url: "data.json",
             dataType: "json",
@@ -34,19 +36,17 @@ $(document).on("click", '.car-wrapper', function (event) {
             success: function (jsonData) {
                 tempCar["speed"] = jsonData.cars[tempCar["id"] - 1]["speed"];
                 tempCar["image"] = jsonData.cars[tempCar["id"] - 1]["image"];
-                crtanjeStaze(tempCar["id"], jsonData.distance, tempCar["image"]);
-                crtanjeOgranicenja(jsonData.speed_limits, jsonData.distance);
+                drawingTrack(tempCar["id"], jsonData.distance, tempCar["image"]);
+                drawingSpeedLimits(jsonData.speed_limits, jsonData.distance);
                 $(".raceTracks :not(:first-child) .singleTrack .distance .label").remove();
-                crtanjeSemafora(jsonData.traffic_lights, jsonData.distance);
+                drawingTrafficLights(jsonData.traffic_lights, jsonData.distance);
             }
         });
         nizZaTrku.push(tempCar);
     }
-
-
 });
 
-// GET CARS AND DRAW THEM ON PAGE
+// GET CARS AND DISPLAY THEM ON PAGE
 var getJSON = function (inputStr) {
     $.ajax({
         url: "data.json",
@@ -54,15 +54,14 @@ var getJSON = function (inputStr) {
         method: "GET",
         success: function (jsonData) {
             window.data = jsonData;
-            var niz = jsonData;
-            var cars = niz.cars;
+            var cars = window.data.cars;
             var filtered = [];
 
             if (inputStr == "") {
                 filtered = cars;
             } else {
                 filtered = $.grep(cars, function (car, i) {
-                    //  caps sensitive
+                    // search is caps sensitive
                     return car.name.search(inputStr) > -1;
                 });
             }
@@ -70,10 +69,9 @@ var getJSON = function (inputStr) {
             $("#carsList").empty();
             $.map(filtered, function (n, i) {
                 var row;
-                if (i%3==0){
+                if (i % 3 == 0) {
                     row = $('<div class="row"></div>');
-                $("#carsList").append(row);
-
+                    $("#carsList").append(row);
                 }
                 else {
                     row = $("#carsList .row").last();
@@ -85,9 +83,9 @@ var getJSON = function (inputStr) {
                 var carImage = $('<img>').attr({'src': n.image, 'height': 130, 'alt': 'Photo of ' + n.description});
                 var carName = $('<h4></h4>').html(n.name);
                 var carBackOverlay = $('<div class="overlay"></div>');
-                var carBackData = "<strong>Car name:</strong> "+ n.name + "<br>"+
-                                    "<strong>Car description:</strong> " + n.description + "<br>"+
-                                    "<strong>Car speed:</strong> " + n.speed;
+                var carBackData = "<strong>Car name:</strong> " + n.name + "<br>" +
+                    "<strong>Car description:</strong> " + n.description + "<br>" +
+                    "<strong>Car speed:</strong> " + n.speed;
                 carBackOverlay.html(carBackData);
                 carFrontInfo.append(carImage, carName);
                 carBackInfo.append(carImage.clone(), carBackOverlay);
@@ -99,7 +97,6 @@ var getJSON = function (inputStr) {
     });
 };
 
-
 // ANIMATION
 $(document).on('click', '#startRace', function () {
 
@@ -108,13 +105,14 @@ $(document).on('click', '#startRace', function () {
 
             var animationSpeed = $("#animationSpeed").val();
             var rankings = [];
-            // needs to go before animation to avoid doubling the call (or trippling...)
+            // Changing lights needs to go before animation to avoid doubling the call
             lightHeadElements = $(".lightHead");
             lightelementcounter = 0;
             for (var i = 0; i < lightHeadElements.length; i++) {
                 changeLights(lightHeadElements[i], animationSpeed);
             }
 
+            // calculating times for each car
             $.map(nizZaTrku, function (car, i) {
                 car.distance = 0;
                 var conditions = [];
@@ -138,8 +136,8 @@ $(document).on('click', '#startRace', function () {
                 var pathParts = [];
                 var currentSpeed = car.speed;
 
-                for (let i = 0; i < conditions.length; i++) {
-                    let pathPart = {};
+                for (var i = 0; i < conditions.length; i++) {
+                    var pathPart = {};
 
                     pathPart.speed = currentSpeed;
                     pathPart.length = conditions[i].position - (conditions[i - 1] ? conditions[i - 1].position : 0);
@@ -151,13 +149,13 @@ $(document).on('click', '#startRace', function () {
                         currentSpeed = conditions[i].speed; // menjati samo ako je sporije od moguce brzine automobila
                     }
                     else {
-                        let lightChangesCount = pathParts[pathParts.length - 1].endTime / conditions[i].duration;
-                        let redLight = (lightChangesCount % 2 ? true : false);
+                        var lightChangesCount = pathParts[pathParts.length - 1].endTime / conditions[i].duration;
+                        var redLight = (lightChangesCount % 2 ? true : false);
 
                         var moduo = pathParts[pathParts.length - 1].endTime % conditions[i].duration;
 
                         if (redLight) {
-                            let pathPart = {};
+                            var pathPart = {};
                             pathPart.speed = 0;
                             pathPart.length = 0;
                             pathPart.duration = conditions[i].duration - moduo;
@@ -169,8 +167,8 @@ $(document).on('click', '#startRace', function () {
                 }
 
                 // Animating movement
-                let distance = 0;
-                for (let i = 0; i < pathParts.length; i++) {
+                var distance = 0;
+                for (var i = 0; i < pathParts.length; i++) {
                     distance += pathParts[i].length * 1000 / window.data.distance; //move in px
                     $("#" + car.id).animate({
                         left: distance
@@ -181,6 +179,8 @@ $(document).on('click', '#startRace', function () {
                 rankings.push({"id": car.id, "endTime": pathParts[pathParts.length - 1].endTime});
 
             });
+
+            //assigning medal to the car once the animation ends
             gimmeMedal(rankings, animationSpeed);
 
         } else {
@@ -189,10 +189,7 @@ $(document).on('click', '#startRace', function () {
     } else {
         alert("Obavezno uneti brzinu animacije");
     }
-
-
 });
-
 
 var nizZaTrku = [];
 

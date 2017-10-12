@@ -8,7 +8,7 @@ function alreadyAdded(carID, nzt) {
   return exists;
 }
 
-function crtanjeStaze(carid, dist, image) {
+function drawingTrack(carid, dist, image) {
   var singleRace = $('<div>').attr({'class': 'singleRace', 'data-carID': carid});
   var singleTrack = $('<div>').attr({'class': 'singleTrack'});
 
@@ -17,7 +17,7 @@ function crtanjeStaze(carid, dist, image) {
 
   var distance = $('<div>').attr({'class': 'distance'}).append(
       $('<div>').attr({'class': 'label'}));
-  // racunanje duzina deonica, oznacavanje
+  // counting distances, marking track
   for (var i = 1; i<10; i++) {
     var d = distance.clone();
     d.find('div').html(i*dist/10);
@@ -28,13 +28,14 @@ function crtanjeStaze(carid, dist, image) {
   $(".raceTracks").prepend(singleRace);
 }
 
-function brisanjeStaze(carid) {
+
+function deletingTrack(carid) {
   $('[data-carID='+carid+']').remove();
 }
 
 
-function crtanjeOgranicenja(limits, dist) {   //<-- doraditi sa labelima
-  brisanjeOgranicenja();
+function drawingSpeedLimits(limits, dist) {   //<-- doraditi sa labelima
+  deletingSpeedLimits();
 
   var pxpkm = 1000/dist; //counts length of each km in pixels
   var limit = $('<div>').attr({'class': 'speedLimit'});
@@ -50,13 +51,13 @@ function crtanjeOgranicenja(limits, dist) {   //<-- doraditi sa labelima
 }
 
 
-function brisanjeOgranicenja() {
+function deletingSpeedLimits() {
   $(".speedLimit").remove();
 }
 
 
-function crtanjeSemafora(trafficLights, dist) {
-  brisanjeSemafora();
+function drawingTrafficLights(trafficLights, dist) {
+  deletingTrafficLights();
 
   var pxpkm = 1000/dist; //counts length of each km in pixels
   var light = $('<div>').attr({'class': 'trafficLight'});
@@ -72,24 +73,27 @@ function crtanjeSemafora(trafficLights, dist) {
   }
 }
 
-function brisanjeSemafora() {
+
+function deletingTrafficLights() {
   $(".trafficLight").remove();
 }
 
 
-function brisiAuto(niz, carID) {
+function deleteCar(niz, carID) {
   niz = $.grep(niz, function(e){
     return e.id != carID;
   });
   return niz;
 }
 
-function changeLights(light_head_element, animation_speed) {  //, animation_speed
+
+function changeLights(light_head_element, animation_speed) {
     d = $(light_head_element).data("duration");
     setInterval(function(){
       $(light_head_element).toggleClass("redLight greenLight");
-    }, d / animation_speed );  // / animation_speed
+    }, d / animation_speed );
 }
+
 
 function gimmeMedal(rankingsArray, animation_speed) {
   rankingsArray.sort(function(a,b){
@@ -108,11 +112,4 @@ function gimmeMedal(rankingsArray, animation_speed) {
           $("#" + rankingsArray[2].id).css("background-color", "#965A38");
       }, rankingsArray[2].endTime / animation_speed);
   };
-}
-
-function getCarById(id) {
-    for (var i = 0; i < window.nizZaTrku.length; i++) {
-        if (window.nizZaTrku[i].id == id)
-            return window.nizZaTrku[i];
-    }
 }
