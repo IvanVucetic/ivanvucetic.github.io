@@ -264,7 +264,7 @@ ul.no-bullets {
 
 
 /* mobile navigation */
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .navbar  {
     left: 0px; width: 100%;
     position: fixed; top: 0;
